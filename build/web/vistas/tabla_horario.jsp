@@ -19,10 +19,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="css/estilos_tabla_horario.css" rel="stylesheet" type="text/css"/>
         <link href="https://fonts.googleapis.com/css?family=Bree+Serif|Lato:400,700&display=swap" rel="stylesheet"> 
-
+        <script
+            src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+        crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-        <script src="./js/jquery.js"></script>
     </head>
     <body>
 
@@ -64,7 +66,7 @@
                             <td><%= docente.getApeMaterno()%></td>
                             <td><%= docente.getNombres()%></td>
                             <td><%= docente.getNombreCategoria()%></td>
-                            <td><%= docente.getHorasMin()%></td>
+                            <td><%= docente.getHorasMax()%></td>
                         </tr>
                     </tbody>
                 </table>
@@ -135,7 +137,7 @@
 
                 <div class="row horario-row-7">	
                     <%= cursoDAO.pintarTodosLosSelect(docente.getRestriccion(),
-                         idDocente)%>	
+                            idDocente)%>	
                 </div>
 
                 <div class="row justify-content-end horario-row-8">
@@ -152,37 +154,38 @@
                     <%@ include file="modales/validarHoras.jsp" %>
                     <%@ include file="modales/validarCursos.jsp" %>
                     <%@ include file="modales/validarCursosRepetidos.jsp" %>
-                    <%@ include file="modales/validarMinMaxCeldas.jsp" %>
+                    <%@ include file="modales/validarMinCeldas.jsp" %>
+                    <%@ include file="modales/validarMaxCeldas.jsp" %>
 
                 </div>  
 
             </form>
 
         </div>
-             
-                    <%  out.println("res->" + restriccion);
-                    System.out.println("men-->" + mensajeRestriccion);
-            if(restriccion == 2 || restriccion == 3
-                || restriccion == 4) { %>
-            <div class="modal" tabindex="-1" role="dialog" id="mostrarmodal">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">SOLICITUD DE PERMISO DE MODIFICACIÓN</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body text-uppercase" style="text-align:center;">
-                            <p><%=mensajeRestriccion%></p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
-                        </div>
+
+        <%  out.println("res->" + restriccion);
+            System.out.println("men-->" + mensajeRestriccion);
+            if (restriccion == 2 || restriccion == 3
+                                || restriccion == 4) {%>
+        <div class="modal" tabindex="-1" role="dialog" id="mostrarmodal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">SOLICITUD DE PERMISO DE MODIFICACIÓN</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body text-uppercase" style="text-align:center;">
+                        <p><%=mensajeRestriccion%></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
                     </div>
                 </div>
-            </div>        
-        <% } %>
+            </div>
+        </div>        
+        <% }%>
 
         <script src="js/tabla_horario.js?"></script>
 
@@ -192,7 +195,7 @@
             {
                 $("#mostrarmodal").modal("show");
             });
-            
+
             /************* VALIDAR CAMPOS VACÍOS ***************************/
 
             $('#btnEnviar').click(function () {

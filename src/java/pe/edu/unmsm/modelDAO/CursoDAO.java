@@ -69,7 +69,7 @@ public class CursoDAO {
     
     public int filtrarCursoPorEscuela(int idEscuela, int idCurso){
         int idFiltroCursoPorEscuela = 1;
-        String sql="SELECT idFiltroCursoPorEscuela FROM filtro_curso_por_escuela" 
+        String sql="SELECT idFiltroCursoPorEscuela FROM filtrocursoporescuela" 
                 + " WHERE Escuela_idEscuela = ? AND Curso_idCurso = ?";
 
         try {
@@ -131,7 +131,7 @@ public class CursoDAO {
             
         }else{
             String sql="SELECT idEscuela, nombreEscuela, idCurso, nombreCurso "
-                    + " FROM ((curso_escuela_elegidos LEFT JOIN filtro_curso_por_escuela "
+                    + " FROM ((curso_escuela_elegidos LEFT JOIN filtrocursoporescuela "
                     + " ON idFiltroCursoPorEscuela = FiltroCursoPorEscuela_idFiltroCursoPorEscuela)" 
                     + " LEFT JOIN curso ON Curso_idCurso = idCurso) "
                     + " LEFT JOIN escuela ON Escuela_idEscuela = idEscuela"
@@ -233,7 +233,7 @@ public class CursoDAO {
         
         String pintarOptions = "";
         
-        String sql="SELECT idCurso, nombreCurso FROM filtro_curso_por_escuela LEFT JOIN curso "
+        String sql="SELECT idCurso, nombreCurso FROM filtrocursoporescuela LEFT JOIN curso "
                 + "ON Curso_idCurso = idCurso WHERE Escuela_idEscuela = ?";
  
         try {
