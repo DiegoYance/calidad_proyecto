@@ -22,7 +22,7 @@
             <div class="modal-body">
                 Llene la cantidad de horas según su categoría
                 </br>
-                ( <%=categoria%> : <%=horasCategoria %> horas)
+                (<%=categoria%> : <%=horasCategoria %> horas)
             </div>
             <div class="modal-footer">
     

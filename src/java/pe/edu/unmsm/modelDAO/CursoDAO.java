@@ -121,7 +121,7 @@ public class CursoDAO {
             for(int i=1; i<=4; i++){
                 pintarSelects += ""
                     + "<div id='divSelectEscuela" + i + "' class='col-12 col-sm-6'>" 
-                        + pintarSelectEscuela("idSelectEscuela" + i) 
+                        + pintarSelectEscuela("idSelectEscuela" + i, restriccion) 
                     + "</div>"
 
                     + "<div id='divSelectCurso" + i + "' class='col-12 col-sm-6'>"
@@ -175,9 +175,12 @@ public class CursoDAO {
 
     }
         
-    public String pintarSelectEscuela(String idSelectEscuela){
-     
-        String pintarSelect = ""
+    public String pintarSelectEscuela(String idSelectEscuela, int restriccion){
+        
+        String pintarSelect = "";
+        
+        if(restriccion == 0){
+            pintarSelect = ""
                 
                     + "<select required id='" + idSelectEscuela + "' name='" + idSelectEscuela + "' >" 
                         + "<option value='0' selected='selected' hidden> Elija una Escuela</option>"
@@ -185,6 +188,17 @@ public class CursoDAO {
                     + "</select>" 
                
                 ;
+        }else if(restriccion == 3){
+            pintarSelect = ""
+                
+                    + "<select required id='" + idSelectEscuela + "' name='" + idSelectEscuela + "' >" 
+                        + "<option value='0' selected='selected' hidden> Elija una Escuela</option>"
+                        + pintarOptionEscuela() 
+                    + "</select>" 
+               
+                ;
+        }
+        
 
         return pintarSelect;
     }

@@ -113,6 +113,7 @@
 
                     <tbody class="table-bordered">
                         <%= "esto -->" + docente.getRestriccion()%>
+                        <%= "celdas -->" + celdasBD%>
                         <%= disponiblidadDAO.mostrarTablaDisponibilidad(
                                 8, 21, 1, 7, celdasBD, docente.getRestriccion())%>
                     </tbody>

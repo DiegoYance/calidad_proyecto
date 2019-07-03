@@ -217,12 +217,12 @@ public class DisponibilidadDAO {
             // Entonces se pinta de verde la celda
             if(buscarIdCelda(i + "_" + j, ArrayCeldas)){
                 // Si la restricción es 2,3,4 (el docente no puede modificar la tabla)
-                if(restriccion !=0 || restriccion !=3){
+                if(restriccion==1 || restriccion==2 || restriccion==4){
                     // pinta la celda de verde y la bloquea
                     clasePintar = "class='celda_activa_bloqueada'";
                 }
                 // Si la restricción es 0 o 3 (el docente puede modificar la tabla)
-                else{
+                else if(restriccion==0 || restriccion==3){
                     // pinta la celda en verde y la deja desbloqueada
                     clasePintar = "class='celda_activa'";
                 }
@@ -231,12 +231,12 @@ public class DisponibilidadDAO {
             // No pintamos de verde la celda
             else{
                 // Si la restricción es 2,3,4 (el docente no puede modificar la tabla)
-                if(restriccion !=0 || restriccion !=3){
+                if(restriccion==1 || restriccion==2 || restriccion==4){
                    // No pinta la celda de verde y la bloquea
                    clasePintar = "class='celda_inactiva_bloqueada'";
-               }
+                }
                 // Si la restricción es 0 o 3 (el docente puede modificar la tabla)
-                else{
+                else if(restriccion==0 || restriccion==3){
                     // No pinta la celda de verde y no la bloquea
                    clasePintar = "";
                 } 
