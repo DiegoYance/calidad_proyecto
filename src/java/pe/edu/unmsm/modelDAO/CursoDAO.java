@@ -34,7 +34,7 @@ public class CursoDAO {
            return restriccion;
         }
         
-        String sql="insert into curso_escuela_elegidos (" 
+        String sql="insert into cursoescuelaelegidos (" 
                     + "Docente_idDocente"
                     + ", PeriodoAcademico_idPeriodoAcademico"
                     + ", FiltroCursoPorEscuela_idFiltroCursoPorEscuela) " 
@@ -131,7 +131,7 @@ public class CursoDAO {
             
         }else{
             String sql="SELECT idEscuela, nombreEscuela, idCurso, nombreCurso "
-                    + " FROM ((curso_escuela_elegidos LEFT JOIN filtrocursoporescuela "
+                    + " FROM ((cursoescuelaelegidos LEFT JOIN filtrocursoporescuela "
                     + " ON idFiltroCursoPorEscuela = FiltroCursoPorEscuela_idFiltroCursoPorEscuela)" 
                     + " LEFT JOIN curso ON Curso_idCurso = idCurso) "
                     + " LEFT JOIN escuela ON Escuela_idEscuela = idEscuela"

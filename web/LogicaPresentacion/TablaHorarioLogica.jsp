@@ -62,6 +62,9 @@
                     
                         disponiblidadDAO.agregar(idDocente, celdasRecibidas, restriccion);
                         
+                        // Para que actualice de inmediato la variable cedasBD
+                        celdasBD = celdasRecibidas;
+                        
                         // CURSOS DEL CICLO ANTERIOR/ACTUAL ENVIADOS
                         
                         selectEscuela1 = Integer.parseInt(request.getParameter("idSelectEscuela1"));

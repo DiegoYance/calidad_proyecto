@@ -112,6 +112,7 @@
                     </thead>
 
                     <tbody class="table-bordered">
+                        <%= "esto -->" + docente.getRestriccion()%>
                         <%= disponiblidadDAO.mostrarTablaDisponibilidad(
                                 8, 21, 1, 7, celdasBD, docente.getRestriccion())%>
                     </tbody>
@@ -163,10 +164,10 @@
 
         </div>
 
-        <%  out.println("res->" + restriccion);
+        <%  out.println("res->" + docente.getRestriccion());
             System.out.println("men-->" + mensajeRestriccion);
-            if (restriccion == 2 || restriccion == 3
-                                || restriccion == 4) {%>
+            if (docente.getRestriccion() == 2 || docente.getRestriccion() == 3
+                                || docente.getRestriccion() == 4) {%>
         <div class="modal" tabindex="-1" role="dialog" id="mostrarmodal">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">

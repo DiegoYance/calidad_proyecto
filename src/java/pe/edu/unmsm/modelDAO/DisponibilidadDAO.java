@@ -138,7 +138,7 @@ public class DisponibilidadDAO {
         String tablaDisponibilidad = "";
         String[] ArrayCeldas;
         
-        if("".equals(celdas)){
+        if("".equals(celdas)){ // Si no hay celdas seleccionadas
             for(int i=filaIncio; i<=filaFin; i++){
             
                 tablaDisponibilidad += "" 
@@ -155,8 +155,8 @@ public class DisponibilidadDAO {
 
             }
             
-        }else{
-            ArrayCeldas = celdas.split(",");
+        }else{ // Si hay celdas seleccionadas
+            ArrayCeldas = celdas.split(","); // Obtenemos en un array todas las celdas seleccionadas
             
             for(int i=filaIncio; i<=filaFin; i++){
             
@@ -193,6 +193,7 @@ public class DisponibilidadDAO {
         return "AM";
     }
     
+    // Pintar columnas de la tabla cuando no hay celdas seleccionadas
     public String columnasTabla(int columnaInicio, int columnaFin, int i){
         
         String columnas = "";
@@ -203,30 +204,51 @@ public class DisponibilidadDAO {
         return columnas;
     }
     
+    // Pintar columnas de la tabla cuando hay celdas seleccionadas
     public String columnasTabla(int columnaInicio, int columnaFin, int i, String[] ArrayCeldas, int restriccion){
         
         String columnas = "";
         String clasePintar = "";
         for(int j=columnaInicio; j<=columnaFin; j++){
             
+            // buscamos una celda en el array de celdas seleccionadas:
+            
+            // Si encuentra una celda en el array de celdas seleccionadas
+            // Entonces se pinta de verde la celda
             if(buscarIdCelda(i + "_" + j, ArrayCeldas)){
+                // Si la restricción es 2,3,4 (el docente no puede modificar la tabla)
                 if(restriccion !=0 || restriccion !=3){
+                    // pinta la celda de verde y la bloquea
                     clasePintar = "class='celda_activa_bloqueada'";
-                }else{
+                }
+                // Si la restricción es 0 o 3 (el docente puede modificar la tabla)
+                else{
+                    // pinta la celda en verde y la deja desbloqueada
                     clasePintar = "class='celda_activa'";
                 }
-            }else{
-               if(restriccion !=0 || restriccion !=3){
+            }
+            // Si no encuentra la celda en el array de celdas seleccionadas
+            // No pintamos de verde la celda
+            else{
+                // Si la restricción es 2,3,4 (el docente no puede modificar la tabla)
+                if(restriccion !=0 || restriccion !=3){
+                   // No pinta la celda de verde y la bloquea
                    clasePintar = "class='celda_inactiva_bloqueada'";
-               } 
+               }
+                // Si la restricción es 0 o 3 (el docente puede modificar la tabla)
+                else{
+                    // No pinta la celda de verde y no la bloquea
+                   clasePintar = "";
+                } 
             }
             
             columnas += "<td id='" + i + "_" + j + "' " + clasePintar + " onclick='seleccionarCelda(" + i + "," + j + ")'></td>";
-            clasePintar = "";
+     
         }
         
         return columnas;
     }
+    
     
     public boolean buscarIdCelda(String idCelda, String[] cadena){
         for (String cadena1 : cadena) {

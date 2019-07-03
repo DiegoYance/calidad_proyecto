@@ -10,9 +10,9 @@ package pe.edu.unmsm.config;
  * @author Administrador
  */
 public final class ConfigBD {
-    private static final String NAME_BD = "calidad_proyecto";
+    private static final String NAME_BD = "calidad_proyecto_v2";
     private static final String USER_BD = "root";
-    private static final String PASSWORD_BD = "";
+    private static final String PASSWORD_BD = "root";
 
     public static String getNAME_BD() {
         return NAME_BD;
