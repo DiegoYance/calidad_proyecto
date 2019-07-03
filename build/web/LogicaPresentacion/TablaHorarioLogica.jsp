@@ -37,6 +37,8 @@
                 horasMin = docente.getHorasMin();
                 horasMax = docente.getHorasMax();
                 
+                String horasMaxString = "" + horasMax;
+                
                 restriccion = docente.getRestriccion();
      
                 if(restriccion == 0 || restriccion == 3){             

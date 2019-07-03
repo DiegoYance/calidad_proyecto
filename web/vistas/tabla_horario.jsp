@@ -152,11 +152,14 @@
                     </button>
 
                     <%@ include file="modales/confirmacion.jsp" %>
-                    <%@ include file="modales/validarHoras.jsp" %>
+                    
+                    <jsp:include page="modales/validarHoras.jsp">
+                        <jsp:param name="horasCategoria" value="<%=docente.getHorasMax()%>" />
+                    </jsp:include>
+                    
                     <%@ include file="modales/validarCursos.jsp" %>
                     <%@ include file="modales/validarCursosRepetidos.jsp" %>
-                    <%@ include file="modales/validarMinCeldas.jsp" %>
-                    <%@ include file="modales/validarMaxCeldas.jsp" %>
+                    <%@ include file="modales/validarUnaHoraPorDia.jsp" %>
 
                 </div>  
 
@@ -204,26 +207,23 @@
                 //alert("Número de Celdas: " + ObtenerCantidadCeldasSeleccionadas());
 
                 var celdasSelectValidados = true;
+          
+                var horasCategoria = <%=docente.getHorasMax()%>
 
-                var minCeldas = <%=horasMin%>;
-                var maxCeldas = <%=horasMax%>;
-
-                // VALIDAR CELDAS VACÍAS
-                if (ObtenerCeldasSeleccionadas() === "") {
+                // VALIDAR HORAS VACÍAS O QUE CUMPLA SEGÚN LA CATEGORÍA DEL DOCENTE
+                if (ObtenerCeldasSeleccionadas() === "" || ObtenerCantidadCeldasSeleccionadas() !== horasCategoria) {
                     celdasSelectValidados = false;
-                    //alert('Llene la cantidad mínima de horas requeridas por favor.');
                     $('#modal_validarHoras').modal();
-
                 }
-                // VALIDAR MÍNIMO Y MÁXIMO NÚMERO DE CELDAS
-                else if (ObtenerCantidadCeldasSeleccionadas() < minCeldas || ObtenerCantidadCeldasSeleccionadas() > maxCeldas) {
-                    celdasSelectValidados = false;
-                    $('#modal_validarMinMaxCeldas').modal();
+                
+                // VALIDAR QUE NO HAYA UNA SOLA CELDA SELECCIONADA POR DÍA
+                if(UnaHoraPorDia()){
+                    $('#modal_validarUnaHoraPorDia').modal();
                 }
 
 
                 // VALIDAR SELECT VACÍOS
-                else if ($('#idSelectEscuela1').val() === '0'
+                if ($('#idSelectEscuela1').val() === '0'
                         || $('#idSelectCurso1').val() === '0'
                         || $('#idSelectEscuela2').val() === '0'
                         || $('#idSelectCurso2').val() === '0'
@@ -237,12 +237,12 @@
                     $('#modal_validarCursos').modal();
                 }
 
-                /*
-                 else if(validarCursosRepetidos){
-                 celdasSelectValidados = false;
-                 $('#modal_validarCursosRepetidos').modal();
+                
+                 else if(validarCursosRepetidos()){
+                    celdasSelectValidados = false;
+                    $('#modal_validarCursosRepetidos').modal();
                  }
-                 */
+                 
 
                 if (celdasSelectValidados) {
                     $("#modal_btnEnviar").modal();

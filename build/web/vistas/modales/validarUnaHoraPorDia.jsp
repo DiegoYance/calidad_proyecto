@@ -1,5 +1,5 @@
  <!-- Modal -->
-<div id="modal_validarMinMaxCeldas" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div id="modal_validarUnaHoraPorDia" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -9,8 +9,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                La cantidad de horas mínimas o máximas de su Disponibilidad no
-concuerda con su categoría..
+                Seleccione al menos 2 horas seguidas.
             </div>
             <div class="modal-footer">
     

@@ -53,7 +53,65 @@ function ObtenerCantidadCeldasSeleccionadas(){
                             
 }
 
-/*
+function UnaHoraPorDia(){
+                
+    var cantCeldasPintadasPorDia = 0;
+    var color_id, color_id2, color_id3;
+    
+    // recorrido por columnas
+    for(var j=1; j<=7; j++){
+        for(var i=8; i<=21; i++){
+            color_id = document.getElementById(i + '_' + j);
+            
+            // en la hora 8 no se verifica que la hora anterior este seleccionada
+            if(i === 8){ 
+                if(color_id.classList.contains('celda_activa')){
+                    cantCeldasPintadasPorDia++;
+                    color_id2 = document.getElementById((i+1) + '_' + j);
+                    if(!color_id2.classList.contains('celda_activa')){
+                        return true;
+                    }
+                }  
+            }
+            // en la hora 21 no se verifica que la hora siguiente este seleccionada
+            else if(i === 21){
+                if(color_id.classList.contains('celda_activa')){
+                    cantCeldasPintadasPorDia++;
+                    color_id2 = document.getElementById((i-1) + '_' + j);
+                    if(!color_id2.classList.contains('celda_activa')){
+                        return true;
+                    }
+                }  
+            }
+            /* en horas diferente a los extremos (8 y 21) se debe verificar que
+             * una hora antes o después esten seleccionados, al menos uno de
+             * esos debe estar seleccionado para verificar que no haya una sola
+             * hora suelta seleccionada.
+             */
+            else{
+                if(color_id.classList.contains('celda_activa')){
+                    cantCeldasPintadasPorDia++;
+                    color_id2 = document.getElementById((i-1) + '_' + j);
+                    color_id3 = document.getElementById((i+1) + '_' + j);
+                    if(!color_id2.classList.contains('celda_activa') &&
+                            !color_id3.classList.contains('celda_activa')){
+                        return true;
+                    }
+                }  
+            }
+        }
+        if(cantCeldasPintadasPorDia === 1){
+            return true;
+        }else{
+           cantCeldasPintadasPorDia = 0; 
+        }
+    }
+    
+    return false;
+                            
+}
+
+
 function validarCursosRepetidos(){
     // BUSCAR CURSOS REPETIDOS DE LA MISMA ESCUELA 
         var n = 4, i, j, it, cursosRepetidos = false;
@@ -71,7 +129,7 @@ function validarCursosRepetidos(){
         
         return cursosRepetidos;
 }
-*/
+
 
 
  /**********************  SELECT  **************************/
