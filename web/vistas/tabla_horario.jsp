@@ -83,13 +83,13 @@
                         <button><em class="fas fa-print">
                             </em> Imprimir
                         </button>&nbsp;&emsp;
-
-                        <button type="button" data-toggle="modal" data-target="#modal_enviar_solicitud" data-whatever="@mdo">
-                            <em class="fas fa-edit"></em> Editar
-                        </button>
-                        <input type="hidden" name="idDocenteSolicitud" value="<%=idDocente%>">
-                        <%@ include file="modales/enviarSolicitud.jsp" %>
-
+                        <%if(docente.getRestriccion() < 2){%>
+                            <button type="button" data-toggle="modal" data-target="#modal_enviar_solicitud" data-whatever="@mdo">
+                                <em class="fas fa-edit"></em> Editar
+                            </button>
+                            <input type="hidden" name="idDocenteSolicitud" value="<%=idDocente%>">
+                            <%@ include file="modales/enviarSolicitud.jsp" %>
+                        <%}%>
                     </div>
 
                 </div>
@@ -112,8 +112,6 @@
                     </thead>
 
                     <tbody class="table-bordered">
-                        <%= "esto -->" + docente.getRestriccion()%>
-                        <%= "celdas -->" + celdasBD%>
                         <%= disponiblidadDAO.mostrarTablaDisponibilidad(
                                 8, 21, 1, 7, celdasBD, docente.getRestriccion())%>
                     </tbody>
@@ -168,8 +166,7 @@
 
         </div>
 
-        <%  out.println("res->" + docente.getRestriccion());
-            System.out.println("men-->" + mensajeRestriccion);
+        <%  
             if (docente.getRestriccion() == 2 || docente.getRestriccion() == 3
                                 || docente.getRestriccion() == 4) {%>
         <div class="modal" tabindex="-1" role="dialog" id="mostrarmodal">

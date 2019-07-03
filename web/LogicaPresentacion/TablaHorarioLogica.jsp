@@ -61,8 +61,14 @@
                         // CELDAS ENVIADAS
                         // Le quitamos la última coma
                         celdasRecibidas = celdasRecibidas.substring(0, celdasRecibidas.length()-1);
-                    
-                        disponiblidadDAO.agregar(idDocente, celdasRecibidas, restriccion);
+                        
+                        if(restriccion == 0){
+                            disponiblidadDAO.agregar(idDocente, celdasRecibidas, restriccion);
+                        } else {
+                            disponiblidadDAO.update(idDocente, restriccion);
+                            disponiblidadDAO.agregar(idDocente, celdasRecibidas, 0);
+                        }
+                        
                         
                         // Para que actualice de inmediato la variable cedasBD
                         celdasBD = celdasRecibidas;
@@ -89,8 +95,10 @@
                                docente.setRestriccion(1);
                             //}
                         }else if(restriccion == 3){
-                            mensajeRestriccion = "Su solicitud de permiso fue aceptado.";
-                            // Aún falta implementar
+                           cursoDAO.update(idDocente, restriccion, escuelas, cursos);
+                           cursoDAO.agregar(idDocente, 0, escuelas, cursos);
+                            docDAO.updateRestriccion(idDocente, 5);
+                            docente.setRestriccion(5);
                         }
                         
                         botonDesabilitado = "disabled class='horario-row8-btnEnviarBloqueado'";
@@ -102,7 +110,7 @@
                         mensajeRestriccion = "Su solicitud de permiso fue aceptado.";
                     }
         
-                }else if(restriccion == 1 || restriccion == 2 || restriccion == 4){
+                }else if(restriccion == 1 || restriccion == 2 || restriccion == 4 || restriccion == 5){
                     imprimirEditar = "";
                     botonDesabilitado = "disabled class='horario-row8-btnEnviarBloqueado'";
                     

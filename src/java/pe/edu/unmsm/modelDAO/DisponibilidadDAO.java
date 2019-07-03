@@ -100,6 +100,21 @@ public class DisponibilidadDAO {
        return 0;
     }
     
+    public void update(int idDocente, int restriccion) {
+
+        
+        String sql="DELETE FROM `disponibilidad` WHERE Docente_idDocente = ?;";
+        con=cn.getConnection();
+        
+        try {
+                ps=con.prepareStatement(sql);
+                ps.setInt(1, idDocente);
+                ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("error");
+        }
+    }
+    
     
     public Disponibilidad buscar(int id) {
         String sql="select * from disponibilidad where Docente_idDocente=?";
@@ -217,7 +232,7 @@ public class DisponibilidadDAO {
             // Entonces se pinta de verde la celda
             if(buscarIdCelda(i + "_" + j, ArrayCeldas)){
                 // Si la restricción es 2,3,4 (el docente no puede modificar la tabla)
-                if(restriccion==1 || restriccion==2 || restriccion==4){
+                if(restriccion==1 || restriccion==2 || restriccion==5){
                     // pinta la celda de verde y la bloquea
                     clasePintar = "class='celda_activa_bloqueada'";
                 }
@@ -231,7 +246,7 @@ public class DisponibilidadDAO {
             // No pintamos de verde la celda
             else{
                 // Si la restricción es 2,3,4 (el docente no puede modificar la tabla)
-                if(restriccion==1 || restriccion==2 || restriccion==4){
+                if(restriccion==1 || restriccion==2 || restriccion==4 || restriccion==5){
                    // No pinta la celda de verde y la bloquea
                    clasePintar = "class='celda_inactiva_bloqueada'";
                 }

@@ -66,6 +66,31 @@ public class CursoDAO {
         
     }
     
+    public int update(int idDocente, int restriccion, int[] escuelas, int[] cursos){
+        if(restriccion!=3){
+           return restriccion;
+        }
+        
+        String sql="DELETE FROM `cursoescuelaelegidos` WHERE Docente_idDocente = ?;";
+        con=cn.getConnection();
+        
+        try {
+                ps=con.prepareStatement(sql);
+                ps.setInt(1, idDocente);
+                ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("error");
+        }
+        return 1;
+    }
+    
+    public static void main(String[] args) {
+        CursoDAO a = new CursoDAO();
+        int escuelas[] = {1,1,1,1};
+        int cursos[] = {1,2,3,4};
+        a.update(1, 0, escuelas, cursos);
+    }
+    
     
     public int filtrarCursoPorEscuela(int idEscuela, int idCurso){
         int idFiltroCursoPorEscuela = 1;
@@ -117,7 +142,7 @@ public class CursoDAO {
         
         String pintarSelects = "";
         
-        if(restriccion == 0){
+        if(restriccion == 0 || restriccion == 3){
             for(int i=1; i<=4; i++){
                 pintarSelects += ""
                     + "<div id='divSelectEscuela" + i + "' class='col-12 col-sm-6'>" 
