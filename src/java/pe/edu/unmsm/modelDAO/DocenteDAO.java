@@ -12,12 +12,13 @@ import java.util.List;
 
 public class DocenteDAO extends UsuarioDAO {
 
-    ConexionBD cn = ConexionBD.getConexion();
-    Connection con;
-    PreparedStatement ps;
-    ResultSet rs;
-    Docente docente;
+    ConexionBD cn = ConexionBD.getConexion();   //Se conecta con la bd
+    Connection con; //Obtiene la conexion
+    PreparedStatement ps;   //Prepara la consulta
+    ResultSet rs;   //Ejecuta la consulta
+    Docente docente;    //Clase docente
 
+    //Obtiene el docente buscado
     public Docente buscar(int idDocente) {
         String sql = "SELECT * FROM docente INNER JOIN categoria "
                 + " ON Categoria_idCategoria = idCategoria WHERE idDocente=?";
@@ -48,7 +49,8 @@ public class DocenteDAO extends UsuarioDAO {
         }
         return docente;
     }
-
+    
+    //Obtiene la restriccion del docente
     public boolean updateRestriccion(int id, int restriccion) {
         String sql = "UPDATE docente SET restriccion = ? WHERE idDocente = ?";
 
@@ -66,13 +68,13 @@ public class DocenteDAO extends UsuarioDAO {
         }
 
     }
-
+    
+    //Obtiene la celda que se eligio
     public boolean buscarCeldaElegida(String cadena, String[] arreglo) {
-        for (int i = 0; i < arreglo.length; i++) {
-            if (arreglo[i].equals(cadena)) {
+        for (String arreglo1 : arreglo) {
+            if (arreglo1.equals(cadena)) {
                 return true;
             }
-
         }
         return false;
     }
@@ -110,6 +112,7 @@ public class DocenteDAO extends UsuarioDAO {
         return null;//Si en caso no se encuentra ningun docente
     }
     
+    //Lista la solicitud del docente
     public ResultSet listarSolicitud() {
         String sql = "SELECT * FROM docente INNER JOIN categoria "
                 + " ON docente.Categoria_idCategoria = categoria.idCategoria"

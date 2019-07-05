@@ -12,11 +12,12 @@ import java.sql.SQLException;
  */
 public class PermisosDAO {
 
-    ConexionBD cn = ConexionBD.getConexion();
-    Connection con;
-    PreparedStatement ps;
-    ResultSet rs;
-
+    ConexionBD cn = ConexionBD.getConexion();   //Se conecta con la bd
+    Connection con; //Obtiene la conexion
+    PreparedStatement ps;   //Prepara la consulta
+    ResultSet rs;   //Ejecuta la consulta
+    
+    //Envia la solicitud de permiso al administrador
     public boolean enviarSolicitud(int idDocente, String motivo) {
         String sql = "insert into permisos(docente_idDocente,motivo, aprobado) "
                 + " values(?,?,?)";
@@ -36,7 +37,8 @@ public class PermisosDAO {
             return false;
         }
     }
-
+    
+    //Lista los permisos de los profesores
     public ResultSet listarSolicitud() {
         String sql = "SELECT permisos.motivo, docente.nombres, docente.idDocente, docente.apellido_paterno, "
                 + "docente.apellido_materno, docente.restriccion, docente.codigo "
@@ -52,14 +54,5 @@ public class PermisosDAO {
             System.out.println("Error al conectarse a la base de datos Docente");
         }
         return null;
-    }
-
-    public static void main(String[] args) throws SQLException {
-        PermisosDAO solicitudes = new PermisosDAO();
-        ResultSet rs = solicitudes.listarSolicitud();
-        int i = 1;
-        while (rs != null && rs.next()) {
-            System.out.println(rs.getString("motivo"));
-        }
     }
 }

@@ -115,7 +115,7 @@ public class DisponibilidadDAO {
         }
     }
     
-    
+    //Busca la disponibilidad del profesor
     public Disponibilidad buscar(int id) {
         String sql="select * from disponibilidad where Docente_idDocente=?";
         try {
@@ -138,6 +138,7 @@ public class DisponibilidadDAO {
         return disponibilidad;
     }
     
+    //Quita los ultimos caracteres
     public String quitarUltimoCaracter(String cadena){
         if(cadena != null && !"".equals(cadena)){
             cadena = cadena.substring(0, cadena.length()-1);
@@ -194,6 +195,7 @@ public class DisponibilidadDAO {
                       
     }
     
+    //Valida la hora
     public int validarHora(int i){
         if(i>=13){
             i = i-12;
@@ -201,6 +203,7 @@ public class DisponibilidadDAO {
         return i;
     }
     
+    //Valida el periodo
     public String validarPeriodo(int i){
         if(i>=12){
             return "PM";
@@ -232,7 +235,7 @@ public class DisponibilidadDAO {
             // Entonces se pinta de verde la celda
             if(buscarIdCelda(i + "_" + j, ArrayCeldas)){
                 // Si la restricción es 2,3,4 (el docente no puede modificar la tabla)
-                if(restriccion==1 || restriccion==2 || restriccion==5){
+                if(restriccion==1 || restriccion==2 || restriccion==4 ||restriccion==5){
                     // pinta la celda de verde y la bloquea
                     clasePintar = "class='celda_activa_bloqueada'";
                 }
@@ -264,7 +267,7 @@ public class DisponibilidadDAO {
         return columnas;
     }
     
-    
+    //busca el id de las celdas
     public boolean buscarIdCelda(String idCelda, String[] cadena){
         for (String cadena1 : cadena) {
             if (idCelda.equals(cadena1)) {
@@ -274,6 +277,7 @@ public class DisponibilidadDAO {
         return false;
     }
     
+    //Se encarga de concatenar las celdas en la base de datos
     public String concatenarCeldasDeBD(int id){
         String celdasBD = "";
         
@@ -318,5 +322,4 @@ public class DisponibilidadDAO {
         }
         
     }
-    
 }

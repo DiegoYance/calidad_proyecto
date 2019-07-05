@@ -8,13 +8,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class PeriodoAcademicoDAO {
-    private static ConexionBD cn = ConexionBD.getConexion();
+    private static ConexionBD cn = ConexionBD.getConexion();//Se conecta a la bd
     
     
     public void ingresarFechaLimite(String fecha_inicio, String fecha_fin ) {
-        Connection con;
-        PreparedStatement ps;
-        ResultSet rs;
+        Connection con;//Realiza la conexion
+        PreparedStatement ps;//Prerapa la consulta
+        ResultSet rs;//Ejecuta la consulta
+        
+        //Consulta a la bd
         String sql = "UPDATE periodoacademico SET fechaInicio = ?, fechaFin = ?"
                 + "WHERE idPeriodoAcademico=1";
         try {
@@ -28,7 +30,8 @@ public class PeriodoAcademicoDAO {
             System.out.println("Error al intentar actualizar las fechas.");
         }
     } 
-
+    
+    //Obtiene la fecha limite de la bd
     public String[] fechaLimite(){
         Connection con;
         PreparedStatement ps;

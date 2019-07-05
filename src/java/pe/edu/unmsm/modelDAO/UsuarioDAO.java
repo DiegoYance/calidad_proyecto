@@ -6,7 +6,6 @@
 package pe.edu.unmsm.modelDAO;
 
 import pe.edu.unmsm.conexionBD.ConexionBD;
-import pe.edu.unmsm.model.Docente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,16 +17,16 @@ import java.sql.SQLException;
  */
 public class UsuarioDAO {
     
-    ConexionBD cn = ConexionBD.getConexion();
-    Connection con=cn.getConnection();
-    PreparedStatement ps;
-    ResultSet rs;
-
+    ConexionBD cn = ConexionBD.getConexion();   //Se conecta con la bd
+    Connection con = cn.getConnection(); //Obtiene la conexion
+    PreparedStatement ps;   //Prepara la consulta
+    ResultSet rs;   //Ejecuta la consulta
     
+    //Realizara las consultas
      String sql1 = "select idAdministrador from Administrador where usuario=? and password=?";
      String sql2 = "select idDocente from Docente where codigo=? and password=?";
     
-     
+     //Obtiene el tipo de usuario
     public int obtenerTipoUsuario(String user, String pass){
         int tipoUsuario = 0;
         
@@ -46,7 +45,7 @@ public class UsuarioDAO {
         return tipoUsuario;
     }
 
-    
+    //Obtiene el id del administrador
     public int obtenerIdAdminnistradorPorCuenta(String user, String pass){
        
         int idAdministrador = 0;
@@ -66,6 +65,7 @@ public class UsuarioDAO {
         
     }
     
+    //Obtiene el id del docente
     public int obtenerIdDocentePorCuenta(String user, String pass){
         
         int idDocente = 0;

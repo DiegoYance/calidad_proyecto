@@ -28,7 +28,7 @@ public class CursoDAO {
     public CursoDAO() {
     }
     
-    
+    //Agrega los cursos que a seleccionado el profesor
     public int agregar(int idDocente, int restriccion, int[] escuelas, int[] cursos){
         if(restriccion != 0){
            return restriccion;
@@ -66,6 +66,7 @@ public class CursoDAO {
         
     }
     
+    //Actualiza la tabla docente
     public int update(int idDocente, int restriccion, int[] escuelas, int[] cursos){
         if(restriccion!=3){
            return restriccion;
@@ -84,14 +85,7 @@ public class CursoDAO {
         return 1;
     }
     
-    public static void main(String[] args) {
-        CursoDAO a = new CursoDAO();
-        int escuelas[] = {1,1,1,1};
-        int cursos[] = {1,2,3,4};
-        a.update(1, 0, escuelas, cursos);
-    }
-    
-    
+    //Filtra los cursos del profesor con su respectiva escuela
     public int filtrarCursoPorEscuela(int idEscuela, int idCurso){
         int idFiltroCursoPorEscuela = 1;
         String sql="SELECT idFiltroCursoPorEscuela FROM filtrocursoporescuela" 
@@ -115,7 +109,7 @@ public class CursoDAO {
         
     }
     
-    
+    //Lista los cursos por escuela
     public List listarCursosPorEscuela(int idEscuela) {
         ArrayList<Curso>list=new ArrayList<>();
         String sql1="SELECT * FROM escuela_has_curso INNER JOIN curso ON Curso_idCurso = idCurso WHERE Escuela_idEscuela = ?";
@@ -137,7 +131,7 @@ public class CursoDAO {
         return list;
     }
     
-    
+    //Pinta todos lo select que se obtuvo de la bd
     public String pintarTodosLosSelect(int restriccion, int idDocente){
         
         String pintarSelects = "";
@@ -199,7 +193,8 @@ public class CursoDAO {
         return pintarSelects;
 
     }
-        
+    
+    //Pinta todos los select de la escuela
     public String pintarSelectEscuela(String idSelectEscuela, int restriccion){
         
         String pintarSelect = "";
@@ -228,6 +223,7 @@ public class CursoDAO {
         return pintarSelect;
     }
 
+    //Pinta la opciones de las escuela
     public String pintarOptionEscuela(){
         
         String pintarOptions = "";
@@ -253,7 +249,7 @@ public class CursoDAO {
         return pintarOptions;
     }
     
-    
+    //Pinta los select del curso
     public String pintarSelectCurso(int idEscuela, String idSelectCurso){
      
         String pintarSelect = ""
@@ -268,6 +264,7 @@ public class CursoDAO {
         return pintarSelect;
     }
     
+    //Pinta las opciones del curso
     public String pintarOptionCurso(int idEscuela){
         
         String pintarOptions = "";
@@ -294,6 +291,4 @@ public class CursoDAO {
         
         return pintarOptions;
     }
-    
-    
 }
